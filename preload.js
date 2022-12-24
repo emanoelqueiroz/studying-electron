@@ -9,6 +9,8 @@ contextBridge.exposeInMainWorld('versions', {
 contextBridge.exposeInMainWorld('os', {
   cpus: () => ipcRenderer.invoke('cpusInfo'),
   memory: () => ipcRenderer.invoke('memoryInfo'),
+  openExplorer: () => ipcRenderer.invoke('openFileExplorer'),
+  openGame: (path) => ipcRenderer.invoke('openGame', path),
 })
 
 window.addEventListener('DOMContentLoaded', () => {

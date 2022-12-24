@@ -13,9 +13,9 @@ const freeMem = computed(() => convertsToGb(obj.value.freemem))
 const totalMem = computed(() => convertsToGb(obj.value.totalmem))
 const usedMem = computed(() => convertsToGb(obj.value.totalmem - obj.value.freemem))
 
-const freeMemFormated = computed(() => fixValue(freeMem.value))
-const totalMemFormated = computed(() => fixValue(totalMem.value))
-const usedMemFormated = computed(() => fixValue(usedMem.value))
+const freeMemFormated = computed(() => fixValue(freeMem.value / 1024))
+const totalMemFormated = computed(() => fixValue(totalMem.value / 1024))
+const usedMemFormated = computed(() => fixValue(usedMem.value / 1024))
 
 function convertsToGb(value) {
   return (value / 1024) / 1024
@@ -48,11 +48,7 @@ setInterval(() => getMemoryInfo(), 1000)
         </li>
         <li>
           <span>Free Memory:</span>
-          {{ freeMemFormated }} GB
-        </li>
-        <li>
-          <span>Total Memory:</span>
-          {{ totalMemFormated }} GB
+          {{ freeMemFormated }} GB of {{ totalMemFormated }} GB
         </li>
       </ul>
       <MemoryUsageGraph :used="usedMem" :free="freeMem" :total="totalMem" />

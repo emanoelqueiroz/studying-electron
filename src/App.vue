@@ -2,6 +2,13 @@
 import CpuCard from './components/CpuCard.vue'
 import MemoryCard from './components/MemoryCard.vue'
 import VersionsCard from './components/VersionsCard.vue'
+import GamesCard from './components/GamesCard.vue'
+import Button from './components/UI/Button.vue'
+
+function openExplorer() {
+  console.log('XD')
+  os.openExplorer()
+}
 </script>
 
 <template>
@@ -11,7 +18,12 @@ import VersionsCard from './components/VersionsCard.vue'
       <CpuCard />
       <MemoryCard />
     </div>
-    <div></div>
+    <div class="games-wrapper">
+      <!-- <Button type="button" @click="openExplorer">
+        Open Directory
+      </Button> -->
+      <GamesCard />
+    </div>
   </main>
 </template>
 
@@ -37,6 +49,10 @@ ul {
   li span {
     font-weight: 600;
   }
+}
+
+.games-wrapper {
+  padding: 0 13px;
 }
 
 .os-info-cards {

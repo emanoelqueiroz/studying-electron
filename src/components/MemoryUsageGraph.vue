@@ -14,7 +14,7 @@ onMounted(() => {
   const arr = [{
     x: 0,
     y: 0,
-    vx: 5,
+    vx: 15,
     vy: 0,
     radius: 25,
     value: 0,
@@ -49,9 +49,7 @@ onMounted(() => {
     arr.push(newBar)
   }
 
-  watch(props, () => {
-    window.requestAnimationFrame(draw)
-  })
+  watch(props, () => window.requestAnimationFrame(draw))
 })
 
 </script>

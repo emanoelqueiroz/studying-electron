@@ -2,7 +2,7 @@
 import { ref } from 'vue'
 import Card from './Card/Index.vue'
 
-let cpus = ref([])
+let cpus = ref([{}])
 os.cpus().then(data => cpus.value = data)
 </script>
 
@@ -13,9 +13,13 @@ os.cpus().then(data => cpus.value = data)
     </template>
     <template #content>
       <ul>
-        <li v-for="(item, index) in cpus">
-          <span>Core {{ index + 1 }}:</span>
-          {{ item.model }}
+        <li>
+          <span>Model:</span>
+          {{ cpus[0].model }}
+        </li>
+        <li>
+          <span>Number of Cores:</span>
+          {{ cpus.length }}
         </li>
       </ul>
     </template>

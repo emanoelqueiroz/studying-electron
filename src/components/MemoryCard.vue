@@ -51,7 +51,7 @@ setInterval(() => getMemoryInfo(), 1000)
           {{ freeMemFormated }} GB of {{ totalMemFormated }} GB
         </li>
       </ul>
-      <MemoryUsageGraph :used="usedMem" :free="freeMem" :total="totalMem" />
+      <!-- <MemoryUsageGraph :used="usedMem" :free="freeMem" :total="totalMem" /> -->
     </template>
   </Card>
 </template>

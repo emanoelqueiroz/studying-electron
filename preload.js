@@ -11,6 +11,8 @@ contextBridge.exposeInMainWorld('os', {
   memory: () => ipcRenderer.invoke('memoryInfo'),
   openExplorer: () => ipcRenderer.invoke('openFileExplorer'),
   openGame: (path) => ipcRenderer.invoke('openGame', path),
+  saveGames: (games) => ipcRenderer.invoke('saveGames', games),
+  getGames: () => ipcRenderer.invoke('getGames'),
 })
 
 window.addEventListener('DOMContentLoaded', () => {

@@ -2,6 +2,7 @@ const { app, BrowserWindow, ipcMain } = require('electron')
 const { spawn } = require('node:child_process')
 
 const os = require('os')
+const fs = require('fs')
 const path = require('path')
 
 function createWindow() {
@@ -20,9 +21,24 @@ function createWindow() {
     totalmem: os.totalmem(),
   }))
 
+  ipcMain.handle('getGames', (params, games) => {
+    const file = fs.readFileSync('src/data/games.json')
+    return JSON.parse(file)
+  })
+
+  ipcMain.handle('saveGames', (params, game) => {
+    const file = fs.readFileSync('src/data/games.json')
+    const games = JSON.parse(file)
+
+    games.push(game)
+
+    console.log(games);
+    // fs.writeFileSync('src/data/games.json', JSON.stringify(games));
+    return true;
+  })
+
   ipcMain.handle('openFileExplorer', () => {
-    // const ls = spawn('nemo', ['--browser', os.userInfo().homedir])
-    const ls = spawn('ls', ['', '/wine'])
+    const ls = spawn('nemo', ['--browser', os.userInfo().homedir])
 
     ls.stdout.on('data', (data) => {
       console.log(`stdout: ${data}`)

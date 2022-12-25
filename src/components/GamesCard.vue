@@ -1,8 +1,18 @@
 <script setup>
-import Card from './Card/Index.vue'
+import { ref } from 'vue'
 
-function openGame(path) {
-  os.openGame(path)
+import Card from './Card/Index.vue'
+import Button from './UI/Button.vue'
+import Modal from './AddGameModal.vue'
+import GameCard from './GameCard.vue'
+
+let games = ref([])
+let isModalShowing = ref(false)
+
+os.getGames().then(data => games.value = data)
+
+function showModal() {
+  isModalShowing.value = !isModalShowing.value
 }
 </script>
 
@@ -12,8 +22,11 @@ function openGame(path) {
       Games
     </template>
     <template #content>
-      <img class="game-card" @click="openGame('/Downloads/World of Warcraft 3.3.5a/Wow.exe')"
-        src="../assets/wowotlk.png" width="150" height="225" />
+      <div class="actions">
+        <Button type="button" @click="showModal">Add Game</Button>
+        <Modal v-if="isModalShowing" @close-modal="showModal" />
+      </div>
+      <GameCard v-for="item in games" :src="item.imgSrc" :path="item.path" />
     </template>
   </Card>
 </template>
@@ -21,15 +34,5 @@ function openGame(path) {
 <style lang="scss" scoped>
 img {
   margin-top: 13px;
-}
-
-.game-card {
-  cursor: pointer;
-  border-radius: 3px;
-  transition: 0.2s;
-
-  &:hover {
-    opacity: 0.7;
-  }
 }
 </style>
